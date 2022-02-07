@@ -10,7 +10,7 @@ This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
-```{r echo=FALSE}
+```{r eval=FALSE}
 library(data.table)
 library(tidyverse)
 library(quarto)
@@ -73,6 +73,7 @@ viewof intensity = Inputs.range([0, 500], {step: 1, label: "Days"})
 viewof islands = Inputs.select(data.map(d => d.County), {
   multiple: true, 
   label: "County", 
+  value: "Forsyth",
   sort: true, 
   unique: true})
   
@@ -90,14 +91,22 @@ filtered = data.filter(function(data) {
 ```{ojs}
 #| eval: true
 import { aq, op } from '@uwdata/arquero'
-penguins = await aq.loadCSV('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv')
+penguins = aq.loadCSV('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv')
 
 ```
 
 ```{ojs}
+
+joingtab = aq.table({ County: islands})
+
+joingtab
+```
+
+
+```{ojs}
 #| eval: true
 viewof datUse = penguins
-  //.filter(p => islands.includes(p.County))
+  .semijoin(joingtab, 'County')
   .groupby('County')
   .slice(0,intensity)
   .view(intensity);
