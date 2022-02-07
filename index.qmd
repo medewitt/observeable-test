@@ -1,0 +1,119 @@
+---
+title: "forsyth-observable"
+execute:
+  eval: true
+  echo: false
+  message: false
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+```{r echo=FALSE}
+library(data.table)
+library(tidyverse)
+library(quarto)
+dat <- nccovid::get_cdc_vax()
+
+dat_forsyth <- setDT(dat)[County == "Forsyth"]
+
+fwrite(dat_forsyth, "test.csv")
+
+fwrite(dat[County %in% c("Forsyth", "Guilford")], "test2.csv")
+```
+
+```{r}
+2+2
+```
+
+
+Now to try Observable
+
+```{ojs}
+#| eval: true
+Plot.plot({
+  y: {
+    grid: true,
+    label: "Percent of Population Fully Vaccinated"
+  },
+  marks: [
+    Plot.line(filtered, {
+    x: "Date", 
+    y: "Series_Complete_Pop_Pct", 
+    stroke: "County"}),
+    Plot.text(filtered, Plot.selectLast({
+    x: "Date",
+    y: "Series_Complete_Pop_Pct",
+    z: "County",
+    text: "County",
+    textAnchor: "Series_Complete_Pop_Pct",
+    dx:3,
+    dy: 3
+})),
+  ]
+})
+```
+
+
+```{ojs}
+#| eval: true
+data = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })
+```
+
+
+```{ojs}
+#| eval: true
+viewof intensity = Inputs.range([0, 500], {step: 1, label: "Days"})
+
+```
+
+```{ojs}
+#| eval: true
+viewof islands = Inputs.select(data.map(d => d.County), {
+  multiple: true, 
+  label: "County", 
+  sort: true, 
+  unique: true})
+  
+ islands
+```
+
+
+```{ojs}
+filtered = data.filter(function(data) {
+  return islands.includes(data.County);
+})
+```
+
+
+```{ojs}
+#| eval: true
+import { aq, op } from '@uwdata/arquero'
+penguins = await aq.loadCSV('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv')
+
+```
+
+```{ojs}
+#| eval: true
+viewof datUse = penguins
+  //.filter(p => islands.includes(p.County))
+  .groupby('County')
+  .slice(0,intensity)
+  .view(intensity);
+```
+
+```{ojs}
+#| eval: true
+Plot.plot({
+  y: {
+    grid: true,
+    label: "Percent of Population Fully Vaccinated"
+  },
+  marks: [
+    Plot.line(datUse.indices(), {x: datUse.column("Date"), y: datUse.column("Series_Complete_Pop_Pct"),
+    stroke: datUse.column("County")})
+  ],
+  caption: html`Figure 1. This chart has a <i>fancy</i> caption.`
+})
+```

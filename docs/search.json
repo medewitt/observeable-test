@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "forsyth-observable",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✓ ggplot2 3.3.5.9000     ✓ purrr   0.3.4.9000\n✓ tibble  3.1.5.9000     ✓ dplyr   1.0.7.9000\n✓ tidyr   1.1.4.9000     ✓ stringr 1.4.0.9000\n✓ readr   1.4.0          ✓ forcats 0.5.1     \n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\nx dplyr::between()   masks data.table::between()\nx dplyr::filter()    masks stats::filter()\nx dplyr::first()     masks data.table::first()\nx dplyr::lag()       masks stats::lag()\nx dplyr::last()      masks data.table::last()\nx purrr::transpose() masks data.table::transpose()\n\n\n\n\n[1] 4\n\n\nNow to try Observable\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Percent of Population Fully Vaccinated\"\n  },\n  marks: [\n    Plot.line(filtered, {\n    x: \"Date\", \n    y: \"Series_Complete_Pop_Pct\", \n    stroke: \"County\"}),\n    Plot.text(filtered, Plot.selectLast({\n    x: \"Date\",\n    y: \"Series_Complete_Pop_Pct\",\n    z: \"County\",\n    text: \"County\",\n    textAnchor: \"Series_Complete_Pop_Pct\",\n    dx:3,\n    dy: 3\n})),\n  ]\n})\n\n\n\n\n\n\n\ndata = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })\n\n\n\n\n\n\n\nviewof intensity = Inputs.range([0, 500], {step: 1, label: \"Days\"})\n\n\n\n\n\n\n\nviewof islands = Inputs.select(data.map(d => d.County), {\n  multiple: true, \n  label: \"County\", \n  sort: true, \n  unique: true})\n  \n islands\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfiltered = data.filter(function(data) {\n  return islands.includes(data.County);\n})\n\n\n\n\n\n\n\nimport { aq, op } from '@uwdata/arquero'\npenguins = await aq.loadCSV('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv')\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof datUse = penguins\n  //.filter(p => islands.includes(p.County))\n  .groupby('County')\n  .slice(0,intensity)\n  .view(intensity);\n\n\n\n\n\n\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Percent of Population Fully Vaccinated\"\n  },\n  marks: [\n    Plot.line(datUse.indices(), {x: datUse.column(\"Date\"), y: datUse.column(\"Series_Complete_Pop_Pct\"),\n    stroke: datUse.column(\"County\")})\n  ],\n  caption: html`Figure 1. This chart has a <i>fancy</i> caption.`\n})"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  }
+]
