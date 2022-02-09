@@ -12,5 +12,33 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#filters",
+    "href": "index.html#filters",
+    "title": "forsyth-observable",
+    "section": "Filters",
+    "text": "Filters\nNow select level of care you wish to see. Note all values are taken at the Midnight Census.\n\nviewof islands = Inputs.select(data.map(d => d.County), {\n  multiple: true, \n  label: \"County\", \n  value: \"Forsyth\",\n  sort: true, \n  unique: true})\n  \n islands"
+  },
+  {
+    "objectID": "index.html#graphics",
+    "href": "index.html#graphics",
+    "title": "forsyth-observable",
+    "section": "Graphics",
+    "text": "Graphics\nIndividual levels of care:\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Number of Patients in Beds\"\n  },\n  marks: [\n    Plot.line(filtered, {\n    x: \"Date\", \n    y: \"Series_Complete_Pop_Pct\", \n    stroke: \"County\"}),\n    Plot.text(filtered, Plot.selectLast({\n    x: \"Date\",\n    y: \"Series_Complete_Pop_Pct\",\n    z: \"County\",\n    text: \"County\",\n    textAnchor: \"Series_Complete_Pop_Pct\",\n    dx : -4,\n})),\n  ]\n})\n\n\n\n\n\n\nOverall:\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Total Census\"\n  },\n  marks: [\n    Plot.line(datUse.indices(), {\n      x: datUse.column(\"Date\"), \n      y: datUse.column(\"total_cnt\")\n      })\n  ],\n  caption: html`Overall Census.`\n})"
+  },
+  {
+    "objectID": "index.html#sources",
+    "href": "index.html#sources",
+    "title": "forsyth-observable",
+    "section": "Sources",
+    "text": "Sources\n\ndata = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })\n\n\n\n\n\n\n\nfiltered = data.filter(function(data) {\n  return islands.includes(data.County);\n})\n\n\n\n\n\n\n\nimport { aq, op } from 'arquero';\n\n\npenguins = await aq.loadCSV('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv')\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njoingtab = aq.table({ County: islands})"
+  },
+  {
+    "objectID": "index.html#summary-tables",
+    "href": "index.html#summary-tables",
+    "title": "forsyth-observable",
+    "section": "Summary Tables",
+    "text": "Summary Tables\nSummary statistics by level of care selected:\n\nviewof datUsesm = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('County')\n  .rollup({ Avg: d => op.average(d.Series_Complete_Pop_Pct),\n            Min: d => op.min(d.Series_Complete_Pop_Pct),\n            Max: d => op.max(d.Series_Complete_Pop_Pct)})\n  .view();\n  \n  datUsesm\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOverall time series\n\nviewof datUse = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('Date')\n  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Pop_Pct)})\n  .view();\n  \n  datUse"
   }
 ]
