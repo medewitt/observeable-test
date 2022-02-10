@@ -1,0 +1,95 @@
+---
+title: "Testing an API Call"
+execute:
+  eval: true
+  echo: false
+  message: false
+---
+
+```{ojs}
+//| eval: true
+viewof islands = Inputs.select(data.map(d => d.State), {
+  multiple: false, 
+  label: "County", 
+  value: "Forsyth",
+  sort: true, 
+  unique: true})
+  
+ islands
+```
+
+This section won't change, it just represents a static construction
+
+```{ojs}
+state = 'TX'
+useUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${state}`
+
+useUrl
+```
+
+This section will change based on the selection.
+
+```{ojs}
+testUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${islands}`
+
+testUrl
+```
+
+This table is static.
+
+```{ojs}
+
+
+import { aq, op} from "@uwdata/arquero"
+
+viewof hospitals = aq.fromCSV(await fetch(useUrl).then(res => res.text()))
+.view()
+
+hospitals
+
+```
+
+This table is not static.
+
+```{ojs}
+viewof hospitalstest = aq.fromCSV(await fetch(testUrl).then(res => res.text()))
+.view()
+
+hospitalstest
+```
+
+
+```{ojs}
+
+viewof dat_agg = hospitalstest
+  .groupby('collection_week')
+  .rollup({ total_beds: d => op.sum(d.total_beds_7_day_coverage)})
+  .ungroup()
+  .orderby('collection_week')
+  .view();
+
+Plot.plot({
+  y: {
+    grid: true,
+    label: "Total 7 Day Coverage"
+  },
+  marks: [
+    Plot.barY(dat_agg.indices(), {
+      x: dat_agg.column("collection_week"), 
+      y: dat_agg.column("total_beds")
+      })
+  ],
+  caption: html`Total 7 Day Coverage`
+})
+```
+
+
+
+
+
+
+
+```{ojs}
+data = FileAttachment('states.csv').csv({ typed: true })
+```
+

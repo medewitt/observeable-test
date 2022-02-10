@@ -10,8 +10,9 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: hospitals.qmd
+        text: API Calls
       - about.qmd
-
 format:
   html:
     theme: cosmo

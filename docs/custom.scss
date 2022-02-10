@@ -1,1 +1,11 @@
 $primary: #2e6276;
+$background-color: #2e6276;
+$navbar-bg: #2e6276;
+
+.navbar-dark {
+    background-color:$primary;
+}
+
+.navbar-light {
+    background-color:$primary;
+}

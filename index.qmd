@@ -93,7 +93,7 @@ Plot.plot({
 ## Sources
 
 ```{ojs}
-#| eval: true
+//#| eval: true
 data = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })
 ```
 
