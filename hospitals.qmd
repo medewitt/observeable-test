@@ -43,7 +43,7 @@ This table is static.
 import { aq, op} from "@uwdata/arquero"
 
 viewof hospitals = aq.fromCSV(await fetch(useUrl).then(res => res.text()))
-.view()
+.view();
 
 hospitals
 
@@ -53,7 +53,7 @@ This table is not static.
 
 ```{ojs}
 viewof hospitalstest = aq.fromCSV(await fetch(testUrl).then(res => res.text()))
-.view()
+.view();
 
 hospitalstest
 ```
@@ -68,6 +68,11 @@ viewof dat_agg = hospitalstest
   .orderby('collection_week')
   .view();
 
+
+```
+
+
+```{ojs}
 Plot.plot({
   y: {
     grid: true,
@@ -82,8 +87,6 @@ Plot.plot({
   caption: html`Total 7 Day Coverage`
 })
 ```
-
-
 
 
 

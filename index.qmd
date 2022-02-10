@@ -31,7 +31,7 @@ Note all values are taken at the Midnight Census.
 viewof islands = Inputs.select(data.map(d => d.County), {
   multiple: true, 
   label: "County", 
-  value: "Forsyth",
+  initialValue: "Alamance",
   sort: true, 
   unique: true})
   
