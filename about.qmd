@@ -2,8 +2,16 @@
 title: "About"
 ---
 
-About this site
+Nothing to see here.
 
 ```{r}
 1 + 1
+```
+
+``` stan
+data{
+int N;
+real y[N];
+}
+
 ```

@@ -1,17 +1,10 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "forsyth-observable",
+    "objectID": "hospitals.html",
+    "href": "hospitals.html",
+    "title": "Testing an API Call",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\n\n\n\n[1] 4\n\n\nNow to try Observable\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Percent of Population Fully Vaccinated\"\n  },\n  marks: [\n    Plot.line(filtered, {\n    x: \"Date\", \n    y: \"Series_Complete_Pop_Pct\", \n    stroke: \"County\"}),\n    Plot.text(filtered, Plot.selectLast({\n    x: \"Date\",\n    y: \"Series_Complete_Pop_Pct\",\n    z: \"County\",\n    text: \"County\",\n    textAnchor: \"Series_Complete_Pop_Pct\",\n    dx:3,\n    dy: 3\n})),\n  ]\n})\n\n\n\n\n\n\n\ndata = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })\n\n\n\n\n\n\n\nviewof intensity = Inputs.range([0, 500], {step: 1, label: \"Days\"})\n\n\n\n\n\n\n\nviewof islands = Inputs.select(data.map(d => d.County), {\n  multiple: true, \n  label: \"County\", \n  value: \"Forsyth\",\n  sort: true, \n  unique: true})\n  \n islands\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfiltered = data.filter(function(data) {\n  return islands.includes(data.County);\n})\n\n\n\n\n\n\n\nimport { aq, op } from '@uwdata/arquero'\npenguins = aq.loadCSV('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv')\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njoingtab = aq.table({ County: islands})\n\njoingtab\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof datUse = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('County')\n  .slice(0,intensity)\n  .view(intensity);\n\n\n\n\n\n\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Percent of Population Fully Vaccinated\"\n  },\n  marks: [\n    Plot.line(datUse.indices(), {x: datUse.column(\"Date\"), y: datUse.column(\"Series_Complete_Pop_Pct\"),\n    stroke: datUse.column(\"County\")})\n  ],\n  caption: html`Figure 1. This chart has a <i>fancy</i> caption.`\n})"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "viewof islands = Inputs.select(data.map(d => d.State), {\n  multiple: false, \n  label: \"County\", \n  value: \"Forsyth\",\n  sort: true, \n  unique: true})\n  \n islands\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis section won’t change, it just represents a static construction\n\nstate = 'TX'\nuseUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${state}`\n\nuseUrl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis section will change based on the selection.\n\ntestUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${islands}`\n\ntestUrl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis table is static.\n\nimport { aq, op} from \"@uwdata/arquero\"\n\nviewof hospitals = aq.fromCSV(await fetch(useUrl).then(res => res.text()))\n.view()\n\nhospitals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis table is not static.\n\nviewof hospitalstest = aq.fromCSV(await fetch(testUrl).then(res => res.text()))\n.view()\n\nhospitalstest\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof dat_agg = hospitalstest\n  .groupby('collection_week')\n  .rollup({ total_beds: d => op.sum(d.total_beds_7_day_coverage)})\n  .ungroup()\n  .orderby('collection_week')\n  .view();\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Total 7 Day Coverage\"\n  },\n  marks: [\n    Plot.barY(dat_agg.indices(), {\n      x: dat_agg.column(\"collection_week\"), \n      y: dat_agg.column(\"total_beds\")\n      })\n  ],\n  caption: html`Total 7 Day Coverage`\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndata = FileAttachment('states.csv').csv({ typed: true })"
   },
   {
     "objectID": "index.html#filters",
@@ -32,7 +25,7 @@
     "href": "index.html#sources",
     "title": "Vaccination Rates in North Carolina",
     "section": "Sources",
-    "text": "Sources\n\ndata = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })\n\n\n\n\n\n\n\nfiltered = data.filter(function(data) {\n  return islands.includes(data.County);\n})\n\n\n\n\n\n\n\nimport { aq, op} from \"@uwdata/arquero\"\n\nviewof penguins =  aq\n  .fromCSV(await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').text())\n  .view()\n\npenguins\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njoingtab = aq.table({ County: islands})"
+    "text": "Sources\n\ndata = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })\n\n\n\n\n\n\n\nfiltered = data.filter(function(data) {\n  return islands.includes(data.County);\n})\n\n\n\n\n\n\n\nimport { aq, op} from \"@uwdata/arquero\"\n\nviewof penguins =  aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()))\n.view()\n\n\npenguins\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njoingtab = aq.table({ County: islands})"
   },
   {
     "objectID": "index.html#summary-tables",
@@ -42,10 +35,10 @@
     "text": "Summary Tables\nSummary statistics by level of care selected:\n\nviewof datUsesm = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('County')\n  .rollup({ Avg: d => op.ceil(op.average(d.Series_Complete_Yes)),\n            Min: d => op.min(d.Series_Complete_Yes),\n            Max: d => op.max(d.Series_Complete_Yes)})\n  .view();\n  \n  datUsesm\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOverall time series\n\nviewof datUse = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('Date')\n  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)})\n  .view();\n  \n  datUse"
   },
   {
-    "objectID": "hospitals.html",
-    "href": "hospitals.html",
-    "title": "Testing an API Call",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "viewof islands = Inputs.select(data.map(d => d.State), {\n  multiple: false, \n  label: \"County\", \n  value: \"Forsyth\",\n  sort: true, \n  unique: true})\n  \n islands\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis section won’t change, it just represents a static construction\n\nstate = 'TX'\nuseUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${state}`\n\nuseUrl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis section will change based on the selection.\n\ntestUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${islands}`\n\ntestUrl\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis table is static.\n\nimport { aq, op} from \"@uwdata/arquero\"\n\nviewof hospitals = aq.fromCSV(await fetch(useUrl).then(res => res.text()))\n.view()\n\nhospitals\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis table is not static.\n\nviewof hospitalstest = aq.fromCSV(await fetch(testUrl).then(res => res.text()))\n.view()\n\nhospitalstest\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nviewof dat_agg = hospitalstest\n  .groupby('collection_week')\n  .rollup({ total_beds: d => op.sum(d.total_beds_7_day_coverage)})\n  .ungroup()\n  .orderby('collection_week')\n  .view();\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Total 7 Day Coverage\"\n  },\n  marks: [\n    Plot.barY(dat_agg.indices(), {\n      x: dat_agg.column(\"collection_week\"), \n      y: dat_agg.column(\"total_beds\")\n      })\n  ],\n  caption: html`Total 7 Day Coverage`\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndata = FileAttachment('states.csv').csv({ typed: true })"
+    "text": "Nothing to see here.\n\n1 + 1\n\n[1] 2\n\n\ndata{\nint N;\nreal y[N];\n}"
   }
 ]

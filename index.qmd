@@ -108,9 +108,9 @@ filtered = data.filter(function(data) {
 #| eval: true
 import { aq, op} from "@uwdata/arquero"
 
-viewof penguins =  aq
-  .fromCSV(await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').text())
-  .view()
+viewof penguins =  aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()))
+.view()
+
 
 penguins
 ```
