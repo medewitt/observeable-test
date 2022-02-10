@@ -40,7 +40,7 @@ viewof islands = Inputs.select(data.map(d => d.County), {
 
 ## Graphics
 
-Individual levels of care:
+Review by county the percent of the population vaccinated.
 
 ```{ojs}
 //#| eval: true
@@ -68,12 +68,11 @@ Plot.plot({
 
 
 
-Overall:
-
+Overall numbner of persons vaccinated for selected counties.
 
 
 ```{ojs}
-#| eval: true
+//#| eval: true
 Plot.plot({
   y: {
     grid: true,
@@ -93,7 +92,7 @@ Plot.plot({
 ## Sources
 
 ```{ojs}
-//#| eval: true
+//| eval: true
 data = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })
 ```
 
@@ -105,7 +104,7 @@ filtered = data.filter(function(data) {
 
 
 ```{ojs}
-#| eval: true
+//| eval: true
 import { aq, op} from "@uwdata/arquero"
 
 viewof penguins =  aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()))
@@ -125,7 +124,7 @@ joingtab = aq.table({ County: islands})
 Summary statistics by level of care selected:
 
 ```{ojs}
-#| eval: true
+//| eval: true
 viewof datUsesm = penguins
   .semijoin(joingtab, 'County')
   .groupby('County')
@@ -140,7 +139,7 @@ viewof datUsesm = penguins
 Overall time series
 
 ```{ojs}
-#| eval: true
+//| eval: true
 viewof datUse = penguins
   .semijoin(joingtab, 'County')
   .groupby('Date')
