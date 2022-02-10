@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "forsyth-observable"
+  title: "Covid-19 Observable Test"
   navbar:
     type: dark
     background: primary
@@ -15,7 +15,7 @@ website:
 format:
   html:
     theme: cosmo
-    css: styles.css
+    css: [styles.css, custom.scss]
     toc: true
 
 editor: visual

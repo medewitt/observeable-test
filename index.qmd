@@ -1,14 +1,12 @@
 ---
-title: "forsyth-observable"
+title: "Vaccination Rates in North Carolina"
 execute:
   eval: true
   echo: false
   message: false
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This website reviews Covid-19 metrics using ObservableJS.
 
 ```{r eval=FALSE}
 library(data.table)
@@ -29,7 +27,7 @@ Now select level of care you wish to see.
 Note all values are taken at the Midnight Census.
 
 ```{ojs}
-#| eval: true
+//| eval: true
 viewof islands = Inputs.select(data.map(d => d.County), {
   multiple: true, 
   label: "County", 
@@ -45,11 +43,11 @@ viewof islands = Inputs.select(data.map(d => d.County), {
 Individual levels of care:
 
 ```{ojs}
-#| eval: true
+//#| eval: true
 Plot.plot({
   y: {
     grid: true,
-    label: "Number of Patients in Beds"
+    label: "Percentage of the Population Vaccinated"
   },
   marks: [
     Plot.line(filtered, {
@@ -79,7 +77,7 @@ Overall:
 Plot.plot({
   y: {
     grid: true,
-    label: "Total Census"
+    label: "Persons Vaccinated"
   },
   marks: [
     Plot.line(datUse.indices(), {
@@ -87,7 +85,7 @@ Plot.plot({
       y: datUse.column("total_cnt")
       })
   ],
-  caption: html`Overall Census.`
+  caption: html`Total Population Vaccinated (Selected Counties)`
 })
 ```
 
@@ -108,11 +106,13 @@ filtered = data.filter(function(data) {
 
 ```{ojs}
 #| eval: true
-import { aq, op } from 'arquero';
+import { aq, op} from "@uwdata/arquero"
 
+viewof penguins =  aq
+  .fromCSV(await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').text())
+  .view()
 
-penguins = await aq.loadCSV('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv')
-
+penguins
 ```
 
 ```{ojs}
@@ -129,9 +129,9 @@ Summary statistics by level of care selected:
 viewof datUsesm = penguins
   .semijoin(joingtab, 'County')
   .groupby('County')
-  .rollup({ Avg: d => op.average(d.Series_Complete_Pop_Pct),
-            Min: d => op.min(d.Series_Complete_Pop_Pct),
-            Max: d => op.max(d.Series_Complete_Pop_Pct)})
+  .rollup({ Avg: d => op.ceil(op.average(d.Series_Complete_Yes)),
+            Min: d => op.min(d.Series_Complete_Yes),
+            Max: d => op.max(d.Series_Complete_Yes)})
   .view();
   
   datUsesm
@@ -144,7 +144,7 @@ Overall time series
 viewof datUse = penguins
   .semijoin(joingtab, 'County')
   .groupby('Date')
-  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Pop_Pct)})
+  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)})
   .view();
   
   datUse
