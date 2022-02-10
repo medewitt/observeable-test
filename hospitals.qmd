@@ -90,6 +90,6 @@ Plot.plot({
 
 
 ```{ojs}
-data = FileAttachment('states.csv').csv({ typed: true })
+data = await FileAttachment('states.csv').csv({ typed: true })
 ```
 
