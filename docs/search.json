@@ -18,21 +18,21 @@
     "href": "index.html#graphics",
     "title": "Vaccination Rates in North Carolina",
     "section": "Graphics",
-    "text": "Graphics\nReview by county the percent of the population vaccinated.\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Percentage of the Population Vaccinated\"\n  },\n  marks: [\n    Plot.line(filtered, {\n    x: \"Date\", \n    y: \"Series_Complete_Pop_Pct\", \n    stroke: \"County\"}),\n    Plot.text(filtered, Plot.selectLast({\n    x: \"Date\",\n    y: \"Series_Complete_Pop_Pct\",\n    z: \"County\",\n    text: \"County\",\n    textAnchor: \"Series_Complete_Pop_Pct\",\n    dx : -4,\n})),\n  ]\n})\n\n\n\n\n\n\nOverall numbner of persons vaccinated for selected counties.\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Persons Vaccinated\"\n  },\n  marks: [\n    Plot.line(datUse.indices(), {\n      x: datUse.column(\"Date\"), \n      y: datUse.column(\"total_cnt\")\n      })\n  ],\n  caption: html`Total Population Vaccinated (Selected Counties)`\n})"
+    "text": "Graphics\nReview by county the percent of the population vaccinated.\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Percentage of the Population Vaccinated\"\n  },\n  marks: [\n    Plot.line(filtered, {\n    x: \"Date\", \n    y: \"Series_Complete_Pop_Pct\", \n    stroke: \"County\"}),\n    Plot.text(filtered, Plot.selectLast({\n    x: \"Date\",\n    y: \"Series_Complete_Pop_Pct\",\n    z: \"County\",\n    text: \"County\",\n    textAnchor: \"Series_Complete_Pop_Pct\",\n    dx : -4,\n})),\n  ]\n})\n\n\n\n\n\n\nOverall number of persons vaccinated for selected counties.\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Persons Vaccinated\"\n  },\n  marks: [\n    Plot.line(datUse.indices(), {\n      x: datUse.column(\"Date\"), \n      y: datUse.column(\"total_cnt\")\n      })\n  ],\n  caption: html`Total Population Vaccinated (Selected Counties)`\n})"
   },
   {
     "objectID": "index.html#sources",
     "href": "index.html#sources",
     "title": "Vaccination Rates in North Carolina",
     "section": "Sources",
-    "text": "Sources\n\ndata = await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true });\n\n\n\n\n\n\n\nfiltered = data.filter(function(data) {\n  return islands.includes(data.County);\n})\n\n\n\n\n\n\n\nimport { aq, op} from \"@uwdata/arquero\"\n\npenguins =  {\nconst dat1 = await aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()));\nreturn dat1;\n}\n\n\n\npenguins.view();\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\njoingtab = aq.table({ County: islands});"
+    "text": "Sources\n\ndata = await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true });\n\n\n\n\n\n\n\nfiltered = data.filter(function(data) {\n  return islands.includes(data.County);\n})\n\n\n\n\n\n\n\nimport { aq, op} from \"@uwdata/arquero\"\n\n\n\n\n\n\n\npenguins =  {\nconst dat1 = await aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()));\nreturn dat1;\n}\n\n\n\n\n\n\n\npenguins.view();\n\n\n\n\n\n\n\njoingtab = aq.table({ County: islands});"
   },
   {
     "objectID": "index.html#summary-tables",
     "href": "index.html#summary-tables",
     "title": "Vaccination Rates in North Carolina",
     "section": "Summary Tables",
-    "text": "Summary Tables\nSummary statistics by level of care selected:\n\ndatUsesm = {const d2 = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('County')\n  .rollup({ Avg: d => op.ceil(op.average(d.Series_Complete_Yes)),\n            Min: d => op.min(d.Series_Complete_Yes),\n            Max: d => op.max(d.Series_Complete_Yes)})\n            return d2;};\n  \ndatUsesm.view();\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOverall time series\n\ndatUse = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('Date')\n  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)});\n  \ndatUse.view();"
+    "text": "Summary Tables\nSummary statistics by level of care selected:\n\ndatUsesm = {const d2 = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('County')\n  .rollup({ Avg: d => op.ceil(op.average(d.Series_Complete_Yes)),\n            Min: d => op.min(d.Series_Complete_Yes),\n            Max: d => op.max(d.Series_Complete_Yes)});\n            return d2;};\n\n\n\n\n\n\n\ndatUsesm.view();\n\n\n\n\n\n\nOverall time series\n\ndatUse = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('Date')\n  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)});"
   },
   {
     "objectID": "about.html",

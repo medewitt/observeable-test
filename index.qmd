@@ -65,7 +65,7 @@ Plot.plot({
 })
 ```
 
-Overall numbner of persons vaccinated for selected counties.
+Overall number of persons vaccinated for selected counties.
 
 ```{ojs}
 //#| eval: true
@@ -98,17 +98,23 @@ filtered = data.filter(function(data) {
 ```
 
 ```{ojs}
-//| eval: true
 import { aq, op} from "@uwdata/arquero"
+
+```
+
+```{ojs}
+//| eval: true
 
 penguins =  {
 const dat1 = await aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()));
 return dat1;
 }
 
+```
 
-
+```{ojs}
 penguins.view();
+
 ```
 
 ```{ojs}
@@ -127,9 +133,12 @@ datUsesm = {const d2 = penguins
   .groupby('County')
   .rollup({ Avg: d => op.ceil(op.average(d.Series_Complete_Yes)),
             Min: d => op.min(d.Series_Complete_Yes),
-            Max: d => op.max(d.Series_Complete_Yes)})
+            Max: d => op.max(d.Series_Complete_Yes)});
             return d2;};
   
+```
+
+```{ojs}
 datUsesm.view();
 ```
 
@@ -142,5 +151,4 @@ datUse = penguins
   .groupby('Date')
   .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)});
   
-datUse.view();
 ```

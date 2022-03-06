@@ -230,7 +230,7 @@
 </div>
 </div>
 </div>
-<p>Overall numbner of persons vaccinated for selected counties.</p>
+<p>Overall number of persons vaccinated for selected counties.</p>
 <div class="cell">
 <div class="sourceCode hidden" id="cb3" data-startfrom="72" data-source-offset="-16"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 71;"><span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
 <span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
@@ -272,43 +272,37 @@
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode hidden" id="cb6" data-startfrom="101" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 100;"><span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op} <span class="im">from</span> <span class="st">"@uwdata/arquero"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
 <div class="cell" data-eval="true">
-<div class="sourceCode hidden" id="cb6" data-startfrom="102" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 101;"><span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op} <span class="im">from</span> <span class="st">"@uwdata/arquero"</span></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span>  {</span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> dat1 <span class="op">=</span> <span class="cf">await</span> aq<span class="op">.</span><span class="fu">fromCSV</span>(<span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">'https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv'</span>)<span class="op">.</span><span class="fu">then</span>(res <span class="kw">=&gt;</span> res<span class="op">.</span><span class="fu">text</span>()))<span class="op">;</span></span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> dat1<span class="op">;</span></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>penguins<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb7" data-startfrom="108" data-source-offset="-1"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 107;"><span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span>  {</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> dat1 <span class="op">=</span> <span class="cf">await</span> aq<span class="op">.</span><span class="fu">fromCSV</span>(<span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">'https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv'</span>)<span class="op">.</span><span class="fu">then</span>(res <span class="kw">=&gt;</span> res<span class="op">.</span><span class="fu">text</span>()))<span class="op">;</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> dat1<span class="op">;</span></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<div id="ojs-cell-6-1" data-nodetype="declaration">
+<div id="ojs-cell-7" data-nodetype="declaration">
 
-</div>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<div id="ojs-cell-6-2" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<div id="ojs-cell-6-3" data-nodetype="expression">
-
-</div>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode hidden" id="cb7" data-startfrom="116" data-source-offset="-1"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 115;"><span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>joingtab <span class="op">=</span> aq<span class="op">.</span><span class="fu">table</span>({ <span class="dt">County</span><span class="op">:</span> islands})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb8" data-startfrom="116" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 115;"><span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>penguins<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="ojs-cell-7" data-nodetype="declaration">
+<div id="ojs-cell-8" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode hidden" id="cb9" data-startfrom="122" data-source-offset="-1"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 121;"><span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>joingtab <span class="op">=</span> aq<span class="op">.</span><span class="fu">table</span>({ <span class="dt">County</span><span class="op">:</span> islands})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ojs-cell-9" data-nodetype="declaration">
 
 </div>
 </div>
@@ -318,50 +312,36 @@
 <h2 class="anchored" data-anchor-id="summary-tables">Summary Tables</h2>
 <p>Summary statistics by level of care selected:</p>
 <div class="cell" data-eval="true">
-<div class="sourceCode hidden" id="cb8" data-startfrom="125" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 124;"><span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a>datUsesm <span class="op">=</span> {<span class="kw">const</span> d2 <span class="op">=</span> penguins</span>
-<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">semijoin</span>(joingtab<span class="op">,</span> <span class="st">'County'</span>)</span>
-<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">'County'</span>)</span>
-<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rollup</span>({ <span class="dt">Avg</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">ceil</span>(op<span class="op">.</span><span class="fu">average</span>(d<span class="op">.</span><span class="at">Series_Complete_Yes</span>))<span class="op">,</span></span>
-<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>            <span class="dt">Min</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">min</span>(d<span class="op">.</span><span class="at">Series_Complete_Yes</span>)<span class="op">,</span></span>
-<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>            <span class="dt">Max</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">max</span>(d<span class="op">.</span><span class="at">Series_Complete_Yes</span>)})</span>
-<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> d2<span class="op">;</span>}<span class="op">;</span></span>
-<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a>datUsesm<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb10" data-startfrom="131" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 130;"><span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>datUsesm <span class="op">=</span> {<span class="kw">const</span> d2 <span class="op">=</span> penguins</span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">semijoin</span>(joingtab<span class="op">,</span> <span class="st">'County'</span>)</span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">'County'</span>)</span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rollup</span>({ <span class="dt">Avg</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">ceil</span>(op<span class="op">.</span><span class="fu">average</span>(d<span class="op">.</span><span class="at">Series_Complete_Yes</span>))<span class="op">,</span></span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>            <span class="dt">Min</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">min</span>(d<span class="op">.</span><span class="at">Series_Complete_Yes</span>)<span class="op">,</span></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>            <span class="dt">Max</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">max</span>(d<span class="op">.</span><span class="at">Series_Complete_Yes</span>)})<span class="op">;</span></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> d2<span class="op">;</span>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<div id="ojs-cell-8-1" data-nodetype="declaration">
+<div id="ojs-cell-10" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode hidden" id="cb11" data-startfrom="142" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 141;"><span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a>datUsesm<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<div id="ojs-cell-8-2" data-nodetype="expression">
+<div id="ojs-cell-11" data-nodetype="expression">
 
-</div>
 </div>
 </div>
 </div>
 <p>Overall time series</p>
 <div class="cell" data-eval="true">
-<div class="sourceCode hidden" id="cb9" data-startfrom="140" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 139;"><span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>datUse <span class="op">=</span> penguins</span>
-<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">semijoin</span>(joingtab<span class="op">,</span> <span class="st">'County'</span>)</span>
-<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">'Date'</span>)</span>
-<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rollup</span>({ <span class="dt">total_cnt</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">sum</span>(d<span class="op">.</span><span class="at">Series_Complete_Yes</span>)})<span class="op">;</span></span>
-<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>datUse<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb12" data-startfrom="149" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 148;"><span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a>datUse <span class="op">=</span> penguins</span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">semijoin</span>(joingtab<span class="op">,</span> <span class="st">'County'</span>)</span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">'Date'</span>)</span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rollup</span>({ <span class="dt">total_cnt</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">sum</span>(d<span class="op">.</span><span class="at">Series_Complete_Yes</span>)})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<div id="ojs-cell-9-1" data-nodetype="declaration">
+<div id="ojs-cell-12" data-nodetype="declaration">
 
-</div>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<div id="ojs-cell-9-2" data-nodetype="expression">
-
-</div>
 </div>
 </div>
 </div>
@@ -370,7 +350,7 @@
 </section>
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"viewof islands = Inputs.select(data.map(d => d.County), {\n  multiple: true, \n  label: \"County\", \n  initialValue: \"Alamance\",\n  sort: true, \n  unique: true})\n  \n islands"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"//#| eval: true\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Percentage of the Population Vaccinated\"\n  },\n  marks: [\n    Plot.line(filtered, {\n    x: \"Date\", \n    y: \"Series_Complete_Pop_Pct\", \n    stroke: \"County\"}),\n    Plot.text(filtered, Plot.selectLast({\n    x: \"Date\",\n    y: \"Series_Complete_Pop_Pct\",\n    z: \"County\",\n    text: \"County\",\n    textAnchor: \"Series_Complete_Pop_Pct\",\n    dx : -4,\n})),\n  ]\n})"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"//#| eval: true\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Persons Vaccinated\"\n  },\n  marks: [\n    Plot.line(datUse.indices(), {\n      x: datUse.column(\"Date\"), \n      y: datUse.column(\"total_cnt\")\n      })\n  ],\n  caption: html`Total Population Vaccinated (Selected Counties)`\n})"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"data = await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true });"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"filtered = data.filter(function(data) {\n  return islands.includes(data.County);\n})"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"import { aq, op} from \"@uwdata/arquero\"\n\npenguins =  {\nconst dat1 = await aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()));\nreturn dat1;\n}\n\n\n\npenguins.view();"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"\njoingtab = aq.table({ County: islands});"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"datUsesm = {const d2 = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('County')\n  .rollup({ Avg: d => op.ceil(op.average(d.Series_Complete_Yes)),\n            Min: d => op.min(d.Series_Complete_Yes),\n            Max: d => op.max(d.Series_Complete_Yes)})\n            return d2;};\n  \ndatUsesm.view();"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"datUse = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('Date')\n  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)});\n  \ndatUse.view();"},{"methodName":"interpretQuiet","source":"shinyInput('islands')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"viewof islands = Inputs.select(data.map(d => d.County), {\n  multiple: true, \n  label: \"County\", \n  initialValue: \"Alamance\",\n  sort: true, \n  unique: true})\n  \n islands"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"//#| eval: true\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Percentage of the Population Vaccinated\"\n  },\n  marks: [\n    Plot.line(filtered, {\n    x: \"Date\", \n    y: \"Series_Complete_Pop_Pct\", \n    stroke: \"County\"}),\n    Plot.text(filtered, Plot.selectLast({\n    x: \"Date\",\n    y: \"Series_Complete_Pop_Pct\",\n    z: \"County\",\n    text: \"County\",\n    textAnchor: \"Series_Complete_Pop_Pct\",\n    dx : -4,\n})),\n  ]\n})"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"//#| eval: true\nPlot.plot({\n  y: {\n    grid: true,\n    label: \"Persons Vaccinated\"\n  },\n  marks: [\n    Plot.line(datUse.indices(), {\n      x: datUse.column(\"Date\"), \n      y: datUse.column(\"total_cnt\")\n      })\n  ],\n  caption: html`Total Population Vaccinated (Selected Counties)`\n})"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"data = await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true });"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"filtered = data.filter(function(data) {\n  return islands.includes(data.County);\n})"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"import { aq, op} from \"@uwdata/arquero\""},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"\npenguins =  {\nconst dat1 = await aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()));\nreturn dat1;\n}"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"penguins.view();"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"\njoingtab = aq.table({ County: islands});"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"datUsesm = {const d2 = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('County')\n  .rollup({ Avg: d => op.ceil(op.average(d.Series_Complete_Yes)),\n            Min: d => op.min(d.Series_Complete_Yes),\n            Max: d => op.max(d.Series_Complete_Yes)});\n            return d2;};\n  "},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"datUsesm.view();"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"datUse = penguins\n  .semijoin(joingtab, 'County')\n  .groupby('Date')\n  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)});\n  "},{"methodName":"interpretQuiet","source":"shinyInput('islands')"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../..";
