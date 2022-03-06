@@ -23,8 +23,7 @@ fwrite(dat[County %in% c("Forsyth", "Guilford")], "test2.csv")
 
 ## Filters
 
-Now select level of care you wish to see. 
-Note all values are taken at the Midnight Census.
+Now select level of care you wish to see. Note all values are taken at the Midnight Census.
 
 ```{ojs}
 //| eval: true
@@ -66,10 +65,7 @@ Plot.plot({
 })
 ```
 
-
-
 Overall numbner of persons vaccinated for selected counties.
-
 
 ```{ojs}
 //#| eval: true
@@ -88,12 +84,11 @@ Plot.plot({
 })
 ```
 
-
 ## Sources
 
 ```{ojs}
 //| eval: true
-data = FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true })
+data = await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').csv({ typed: true });
 ```
 
 ```{ojs}
@@ -102,21 +97,23 @@ filtered = data.filter(function(data) {
 })
 ```
 
-
 ```{ojs}
 //| eval: true
 import { aq, op} from "@uwdata/arquero"
 
-viewof penguins =  aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()))
-.view()
+penguins =  {
+const dat1 = await aq.fromCSV(await fetch('https://raw.githubusercontent.com/medewitt/covidcdc/main/output/nc-county-vax.csv').then(res => res.text()));
+return dat1;
+}
 
 
-penguins
+
+penguins.view();
 ```
 
 ```{ojs}
 
-joingtab = aq.table({ County: islands})
+joingtab = aq.table({ County: islands});
 ```
 
 ## Summary Tables
@@ -125,26 +122,25 @@ Summary statistics by level of care selected:
 
 ```{ojs}
 //| eval: true
-viewof datUsesm = penguins
+datUsesm = {const d2 = penguins
   .semijoin(joingtab, 'County')
   .groupby('County')
   .rollup({ Avg: d => op.ceil(op.average(d.Series_Complete_Yes)),
             Min: d => op.min(d.Series_Complete_Yes),
             Max: d => op.max(d.Series_Complete_Yes)})
-  .view();
+            return d2;};
   
-  datUsesm
+datUsesm.view();
 ```
 
 Overall time series
 
 ```{ojs}
 //| eval: true
-viewof datUse = penguins
+datUse = penguins
   .semijoin(joingtab, 'County')
   .groupby('Date')
-  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)})
-  .view();
+  .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)});
   
-  datUse
+datUse.view();
 ```

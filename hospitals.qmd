@@ -42,35 +42,43 @@ This table is static.
 
 import { aq, op} from "@uwdata/arquero"
 
-viewof hospitals = aq.fromCSV(await fetch(useUrl).then(res => res.text()))
-.view();
+hospitals = {
+	const d1 = await  aq.fromCSV(await fetch(useUrl).then(res => res.text()));
+	
+	return d1;
+}
 
-hospitals
+
+hospitals.view();
 
 ```
 
 This table is not static.
 
 ```{ojs}
-viewof hospitalstest = aq.fromCSV(await fetch(testUrl).then(res => res.text()))
-.view();
+hospitalstest = {
+	const d2 = await aq.fromCSV(await fetch(testUrl).then(res => res.text()));
+	
+	return d2;
+}
 
-hospitalstest
+
+hospitalstest.view();
 ```
-
 
 ```{ojs}
 
-viewof dat_agg = hospitalstest
+dat_agg = hospitalstest
   .groupby('collection_week')
   .rollup({ total_beds: d => op.sum(d.total_beds_7_day_coverage)})
   .ungroup()
-  .orderby('collection_week')
-  .view();
+  .orderby('collection_week');
+  
+  
+dat_agg.view();
 
 
 ```
-
 
 ```{ojs}
 Plot.plot({
@@ -88,11 +96,6 @@ Plot.plot({
 })
 ```
 
-
-
-
-
 ```{ojs}
-data = FileAttachment('states.csv').csv({ typed: true })
+data = await FileAttachment('states.csv').csv({ typed: true });
 ```
-
