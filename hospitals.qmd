@@ -22,9 +22,12 @@ This section won't change, it just represents a static construction
 
 ```{ojs}
 state = 'TX'
+```
+
+
+```{ojs}
 useUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${state}`
 
-useUrl
 ```
 
 This section will change based on the selection.
@@ -32,16 +35,16 @@ This section will change based on the selection.
 ```{ojs}
 testUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${islands}`
 
-testUrl
 ```
 
 This table is static.
 
 ```{ojs}
-
-
 import { aq, op} from "@uwdata/arquero"
+```
 
+
+```{ojs}
 hospitals = {
 	const d1 = await  aq.fromCSV(await fetch(useUrl).then(res => res.text()));
 	
@@ -49,9 +52,12 @@ hospitals = {
 }
 
 
-hospitals.view();
-
 ```
+
+```{ojs}
+hospitals.view();
+```
+
 
 This table is not static.
 
@@ -62,9 +68,12 @@ hospitalstest = {
 	return d2;
 }
 
+```
 
+```{ojs}
 hospitalstest.view();
 ```
+
 
 ```{ojs}
 
@@ -74,11 +83,13 @@ dat_agg = hospitalstest
   .ungroup()
   .orderby('collection_week');
   
-  
-dat_agg.view();
-
 
 ```
+
+```{ojs}
+dat_agg.view();
+```
+
 
 ```{ojs}
 Plot.plot({
