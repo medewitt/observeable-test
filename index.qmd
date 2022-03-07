@@ -150,5 +150,11 @@ datUse = penguins
   .semijoin(joingtab, 'County')
   .groupby('Date')
   .rollup({ total_cnt: d => op.sum(d.Series_Complete_Yes)});
-  
+
+```
+
+```{ojs}
+
+datUse.view();
+
 ```
