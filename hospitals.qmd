@@ -26,8 +26,8 @@ state = 'TX'
 
 
 ```{ojs}
-useUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${state}`
-
+//useUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${state}`
+useUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + 'TX'
 ```
 
 This section will change based on the selection.
@@ -63,7 +63,8 @@ This table is not static.
 
 ```{ojs}
 hospitalstest = {
-	const d2 = await aq.fromCSV(await fetch(testUrl).then(res => res.text()));
+  const base = await fetch(testUrl).then(res => res.text());
+	const d2 = aq.fromCSV(await base);
 	
 	return d2;
 }

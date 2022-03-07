@@ -191,7 +191,7 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode hidden" id="cb3" data-startfrom="29" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 28;"><span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>useUrl <span class="op">=</span> <span class="st">'https://healthdata.gov/resource/anag-cw7u.csv?state='</span> <span class="op">+</span> <span class="vs">`</span><span class="sc">${</span>state<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb3" data-startfrom="30" data-source-offset="-79"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 29;"><span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>useUrl <span class="op">=</span> <span class="st">'https://healthdata.gov/resource/anag-cw7u.csv?state='</span> <span class="op">+</span> <span class="st">'TX'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-3" data-nodetype="declaration">
 
@@ -239,10 +239,11 @@
 <p>This table is not static.</p>
 <div class="cell">
 <div class="sourceCode hidden" id="cb8" data-startfrom="65" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 64;"><span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>hospitalstest <span class="op">=</span> {</span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> d2 <span class="op">=</span> <span class="cf">await</span> aq<span class="op">.</span><span class="fu">fromCSV</span>(<span class="cf">await</span> <span class="fu">fetch</span>(testUrl)<span class="op">.</span><span class="fu">then</span>(res <span class="kw">=&gt;</span> res<span class="op">.</span><span class="fu">text</span>()))<span class="op">;</span></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d2<span class="op">;</span></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> base <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(testUrl)<span class="op">.</span><span class="fu">then</span>(res <span class="kw">=&gt;</span> res<span class="op">.</span><span class="fu">text</span>())<span class="op">;</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> d2 <span class="op">=</span> aq<span class="op">.</span><span class="fu">fromCSV</span>(<span class="cf">await</span> base)<span class="op">;</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d2<span class="op">;</span></span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-8" data-nodetype="declaration">
 
@@ -250,7 +251,7 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode hidden" id="cb9" data-startfrom="74" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 73;"><span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>hospitalstest<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb9" data-startfrom="75" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 74;"><span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>hospitalstest<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-9" data-nodetype="expression">
 
@@ -258,11 +259,11 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode hidden" id="cb10" data-startfrom="80" data-source-offset="-1"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 79;"><span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>dat_agg <span class="op">=</span> hospitalstest</span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">'collection_week'</span>)</span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rollup</span>({ <span class="dt">total_beds</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">sum</span>(d<span class="op">.</span><span class="at">total_beds_7_day_coverage</span>)})</span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">ungroup</span>()</span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">orderby</span>(<span class="st">'collection_week'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb10" data-startfrom="81" data-source-offset="-1"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 80;"><span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>dat_agg <span class="op">=</span> hospitalstest</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">groupby</span>(<span class="st">'collection_week'</span>)</span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rollup</span>({ <span class="dt">total_beds</span><span class="op">:</span> d <span class="kw">=&gt;</span> op<span class="op">.</span><span class="fu">sum</span>(d<span class="op">.</span><span class="at">total_beds_7_day_coverage</span>)})</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">ungroup</span>()</span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">orderby</span>(<span class="st">'collection_week'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-10" data-nodetype="declaration">
 
@@ -270,7 +271,7 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode hidden" id="cb11" data-startfrom="90" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 89;"><span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>dat_agg<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb11" data-startfrom="91" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 90;"><span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>dat_agg<span class="op">.</span><span class="fu">view</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-11" data-nodetype="expression">
 
@@ -278,19 +279,19 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode hidden" id="cb12" data-startfrom="95" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 94;"><span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Total 7 Day Coverage"</span></span>
-<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dat_agg<span class="op">.</span><span class="fu">indices</span>()<span class="op">,</span> {</span>
-<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> dat_agg<span class="op">.</span><span class="fu">column</span>(<span class="st">"collection_week"</span>)<span class="op">,</span> </span>
-<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> dat_agg<span class="op">.</span><span class="fu">column</span>(<span class="st">"total_beds"</span>)</span>
-<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>      })</span>
-<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
-<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>  <span class="dt">caption</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`Total 7 Day Coverage`</span></span>
-<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb12" data-startfrom="96" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 95;"><span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Total 7 Day Coverage"</span></span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dat_agg<span class="op">.</span><span class="fu">indices</span>()<span class="op">,</span> {</span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> dat_agg<span class="op">.</span><span class="fu">column</span>(<span class="st">"collection_week"</span>)<span class="op">,</span> </span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> dat_agg<span class="op">.</span><span class="fu">column</span>(<span class="st">"total_beds"</span>)</span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>  <span class="dt">caption</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`Total 7 Day Coverage`</span></span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-12" data-nodetype="expression">
 
@@ -298,7 +299,7 @@
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode hidden" id="cb13" data-startfrom="111" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 110;"><span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">'states.csv'</span>)<span class="op">.</span><span class="fu">csv</span>({ <span class="dt">typed</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode hidden" id="cb13" data-startfrom="112" data-source-offset="-0"><pre class="sourceCode js cell-code code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 111;"><span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">'states.csv'</span>)<span class="op">.</span><span class="fu">csv</span>({ <span class="dt">typed</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="ojs-cell-13" data-nodetype="declaration">
 
@@ -309,7 +310,7 @@
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"viewof islands = Inputs.select(data.map(d => d.State), {\n  multiple: false, \n  label: \"County\", \n  value: \"Forsyth\",\n  sort: true, \n  unique: true})\n  \n islands"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"state = 'TX'"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"useUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${state}`"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"testUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${islands}`"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"import { aq, op} from \"@uwdata/arquero\""},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"hospitals = {\n\tconst d1 = await  aq.fromCSV(await fetch(useUrl).then(res => res.text()));\n\t\n\treturn d1;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"hospitals.view();"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"hospitalstest = {\n\tconst d2 = await aq.fromCSV(await fetch(testUrl).then(res => res.text()));\n\t\n\treturn d2;\n}"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"hospitalstest.view();"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"\ndat_agg = hospitalstest\n  .groupby('collection_week')\n  .rollup({ total_beds: d => op.sum(d.total_beds_7_day_coverage)})\n  .ungroup()\n  .orderby('collection_week');\n  "},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"dat_agg.view();"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"Plot.plot({\n  y: {\n    grid: true,\n    label: \"Total 7 Day Coverage\"\n  },\n  marks: [\n    Plot.barY(dat_agg.indices(), {\n      x: dat_agg.column(\"collection_week\"), \n      y: dat_agg.column(\"total_beds\")\n      })\n  ],\n  caption: html`Total 7 Day Coverage`\n})"},{"methodName":"interpret","cellName":"ojs-cell-13","inline":false,"source":"data = await FileAttachment('states.csv').csv({ typed: true });"},{"methodName":"interpretQuiet","source":"shinyInput('islands')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"viewof islands = Inputs.select(data.map(d => d.State), {\n  multiple: false, \n  label: \"County\", \n  value: \"Forsyth\",\n  sort: true, \n  unique: true})\n  \n islands"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"state = 'TX'"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"//useUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${state}`\nuseUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + 'TX'"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"testUrl = 'https://healthdata.gov/resource/anag-cw7u.csv?state=' + `${islands}`"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"import { aq, op} from \"@uwdata/arquero\""},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"hospitals = {\n\tconst d1 = await  aq.fromCSV(await fetch(useUrl).then(res => res.text()));\n\t\n\treturn d1;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"hospitals.view();"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"hospitalstest = {\n  const base = await fetch(testUrl).then(res => res.text());\n\tconst d2 = aq.fromCSV(await base);\n\t\n\treturn d2;\n}"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"hospitalstest.view();"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"\ndat_agg = hospitalstest\n  .groupby('collection_week')\n  .rollup({ total_beds: d => op.sum(d.total_beds_7_day_coverage)})\n  .ungroup()\n  .orderby('collection_week');\n  "},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"dat_agg.view();"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"Plot.plot({\n  y: {\n    grid: true,\n    label: \"Total 7 Day Coverage\"\n  },\n  marks: [\n    Plot.barY(dat_agg.indices(), {\n      x: dat_agg.column(\"collection_week\"), \n      y: dat_agg.column(\"total_beds\")\n      })\n  ],\n  caption: html`Total 7 Day Coverage`\n})"},{"methodName":"interpret","cellName":"ojs-cell-13","inline":false,"source":"data = await FileAttachment('states.csv').csv({ typed: true });"},{"methodName":"interpretQuiet","source":"shinyInput('islands')"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../..";
