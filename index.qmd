@@ -62,7 +62,7 @@ Plot.plot({
     dx : -4,
 })),
   ]
-})
+});
 ```
 
 Overall number of persons vaccinated for selected counties.
@@ -81,7 +81,7 @@ Plot.plot({
       })
   ],
   caption: html`Total Population Vaccinated (Selected Counties)`
-})
+});
 ```
 
 ## Sources
@@ -94,7 +94,7 @@ data = await FileAttachment('https://raw.githubusercontent.com/medewitt/covidcdc
 ```{ojs}
 filtered = data.filter(function(data) {
   return islands.includes(data.County);
-})
+});
 ```
 
 ```{ojs}
