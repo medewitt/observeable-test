@@ -34,7 +34,7 @@ viewof islands = Inputs.select(data.map(d => d.County), {
   sort: true, 
   unique: true})
   
- islands
+ //islands
 ```
 
 ## Graphics

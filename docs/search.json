@@ -11,7 +11,7 @@
     "href": "index.html#filters",
     "title": "Vaccination Rates in North Carolina",
     "section": "Filters",
-    "text": "Filters\nNow select level of care you wish to see. Note all values are taken at the Midnight Census.\n\nviewof islands = Inputs.select(data.map(d => d.County), {\n  multiple: true, \n  label: \"County\", \n  initialValue: \"Alamance\",\n  sort: true, \n  unique: true})\n  \n islands"
+    "text": "Filters\nNow select level of care you wish to see. Note all values are taken at the Midnight Census.\n\nviewof islands = Inputs.select(data.map(d => d.County), {\n  multiple: true, \n  label: \"County\", \n  initialValue: \"Alamance\",\n  sort: true, \n  unique: true})"
   },
   {
     "objectID": "index.html#graphics",
